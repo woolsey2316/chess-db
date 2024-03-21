@@ -1,3 +1,5 @@
+import Tile from '@/app/components/Tile';
+
 const rank = [1, 2, 3, 4, 5, 6, 7, 8];
 const file = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 export default function ChessBoard() {
@@ -6,21 +8,7 @@ export default function ChessBoard() {
     for (let i = 0; i < file.length; i++) {
       const number = j + i + 2;
 
-      if (number % 2 === 0) {
-        board.push(
-          <div className='w-[100px] h-[100px] bg-green-700'>
-            [{file[i]}
-            {rank[j]}]
-          </div>
-        );
-      } else {
-        board.push(
-          <div className='w-[100px] h-[100px] bg-white'>
-            [{file[i]}
-            {rank[j]}]
-          </div>
-        );
-      }
+      board.push(<Tile number={number} />);
     }
   }
   return (
