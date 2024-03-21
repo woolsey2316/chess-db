@@ -37,6 +37,40 @@ pieces.push({ image: '/images/bishop_w.png', x: 5, y: 0 });
 pieces.push({ image: '/images/queen_w.png', x: 3, y: 0 });
 pieces.push({ image: '/images/king_w.png', x: 4, y: 0 });
 
+let activePiece: HTMLElement | null = null;
+
+function containsChessPiece(element: HTMLElement) {
+  return element.classList.contains('chess-piece');
+}
+function grabPiece(e: React.MouseEvent) {
+  const element = e.target as HTMLElement;
+  if (containsChessPiece(element)) {
+    const x = e.clientX - 75;
+    const y = e.clientY - 50;
+    element.style.position = 'absolute';
+    element.style.left = `${x}px`;
+    element.style.top = `${y}px`;
+
+    activePiece = element;
+  }
+}
+
+function movePiece(e: React.MouseEvent) {
+  if (activePiece) {
+    const x = e.clientX - 75;
+    const y = e.clientY - 50;
+    activePiece.style.position = 'absolute';
+    activePiece.style.left = `${x}px`;
+    activePiece.style.top = `${y}px`;
+  }
+}
+
+function dropPiece(_e: React.MouseEvent) {
+  if (activePiece) {
+    activePiece = null;
+  }
+}
+
 export default function ChessBoard() {
   const board = [];
   for (let j = rank.length - 1; j >= 0; j--) {
@@ -50,11 +84,17 @@ export default function ChessBoard() {
         }
       });
 
-      board.push(<Tile key={i * j + i} image={image} number={number} />);
+      board.push(<Tile key={`${i},${j}`} image={image} number={number} />);
     }
   }
   return (
-    <div id='chessboard' className='flex flex-wrap w-[800px]'>
+    <div
+      onMouseMove={(e) => movePiece(e)}
+      onMouseDown={(e) => grabPiece(e)}
+      onMouseUp={(e) => dropPiece(e)}
+      id='chessboard'
+      className='flex flex-wrap w-[800px]'
+    >
       {board}
     </div>
   );
