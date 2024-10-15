@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 interface Props {
   image?: string;
   number: number;
@@ -19,8 +21,8 @@ export default function Tile({ number, image, highlight }: Props) {
     <div className={className}>
       {image && (
         <div
-          style={{ backgroundImage: `url(${image})` }}
-          className='chess-piece w-[100px] h-[100px] bg-no-repeat bg-center'
+          style={{ backgroundImage: `url(${image})`, backgroundSize: 80 }}
+          className='chess-piece w-[100px] h-[100px] bg-no-repeat bg-center hover:cursor-grab active:cursor-grabbing'
         ></div>
       )}
     </div>
