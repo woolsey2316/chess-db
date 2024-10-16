@@ -2,8 +2,8 @@ import React, { createContext, useState, useEffect } from 'react';
 
 export const AuthContext = createContext<AuthContext>({
   isAuthenticated: false,
-  login: () => { },
-  logout: () => { },
+  login: () => { return },
+  logout: () => { return },
 });
 
 interface AuthProviderProps {

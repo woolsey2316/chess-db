@@ -58,6 +58,7 @@ const Login = () => {
         // Handle refresh token expiration or invalidation
       }
     } catch (error) {
+      return;
     }
   };
 
