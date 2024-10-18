@@ -1,9 +1,11 @@
 'use client';
 
-import React, { useState, useContext, ReactElement } from 'react';
 import { useRouter } from 'next/navigation';
-import { AuthContext } from '@/context/auth';
+import React, { ReactElement, useContext, useState } from 'react';
+
 import Layout from '@/components/Layout';
+
+import { AuthContext } from '@/context/auth';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -14,13 +16,16 @@ const Login = () => {
   const handleLogin: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://fewvlearns-kimy.onrender.com/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
+      const response = await fetch(
+        'https://fewvlearns-kimy.onrender.com/auth/login',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username, password }),
+        }
+      );
       const data = await response.json();
       if (response.ok) {
         localStorage.setItem('token', data.token);
@@ -63,7 +68,10 @@ const Login = () => {
   };
 
   // Example usage when making authenticated requests:
-  const makeAuthenticatedRequest = async (url: string | URL | globalThis.Request, options: RequestInit) => {
+  const makeAuthenticatedRequest = async (
+    url: string | URL | globalThis.Request,
+    options: RequestInit
+  ) => {
     let token = localStorage.getItem('token');
     if (!token) {
       token = await refreshToken();
@@ -75,7 +83,7 @@ const Login = () => {
 
     const headers = {
       ...options.headers,
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     };
 
     const response = await fetch(url, options);
@@ -90,40 +98,42 @@ const Login = () => {
     return response;
   };
 
-
   return (
-    <div className="flex items-center justify-center px-8 py-44">
-      <form onSubmit={handleLogin} className="bg-[#001313] shadow-green-300 p-8 rounded-lg shadow-md w-full max-w-md">
-        <h2 className="text-2xl text-gray-100 mb-6 text-center">Login</h2>
-        <div className="mb-4">
-          <label className="block text-gray-200 mb-2" htmlFor="username">
+    <div className='flex items-center justify-center px-8 py-44'>
+      <form
+        onSubmit={handleLogin}
+        className='bg-[#001313] shadow-green-300 p-8 rounded-lg shadow-md w-full max-w-md'
+      >
+        <h2 className='text-2xl text-gray-100 mb-6 text-center'>Login</h2>
+        <div className='mb-4'>
+          <label className='block text-gray-200 mb-2' htmlFor='username'>
             Username:
           </label>
           <input
-            type="text"
-            id="username"
+            type='text'
+            id='username'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none text-gray-800 focus:ring-2 focus:ring-green-300"
+            className='w-full px-3 py-2 border rounded-lg focus:outline-none text-gray-800 focus:ring-2 focus:ring-green-300'
           />
         </div>
-        <div className="mb-6">
-          <label className="block text-gray-200 mb-2" htmlFor="password">
+        <div className='mb-6'>
+          <label className='block text-gray-200 mb-2' htmlFor='password'>
             Password:
           </label>
           <input
-            type="password"
-            id="password"
+            type='password'
+            id='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none text-gray-800 focus:ring-2 focus:ring-green-300"
+            className='w-full px-3 py-2 border rounded-lg focus:outline-none text-gray-800 focus:ring-2 focus:ring-green-300'
           />
         </div>
         <button
-          type="submit"
-          className="w-full hover:bg-green-300 border border-green-300 text-white hover:text-gray-900 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300"
+          type='submit'
+          className='w-full hover:bg-green-300 border border-green-300 text-white hover:text-gray-900 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300'
         >
           Login
         </button>
@@ -133,11 +143,7 @@ const Login = () => {
 };
 
 Login.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <Layout>
-      {page}
-    </Layout>
-  )
-}
+  return <Layout>{page}</Layout>;
+};
 
 export default Login;

@@ -2,8 +2,11 @@
 
 import Head from 'next/head';
 import * as React from 'react';
+import { ReactElement } from 'react';
 import '@/lib/env';
 
+import EngineLinesPanel from '@/components/EngineLinesPanel';
+import Layout from '@/components/Layout';
 import Referee from '@/components/Referee';
 
 /**
@@ -24,11 +27,16 @@ export default function HomePage() {
       <Head>
         <title>Home Page</title>
       </Head>
-      <section className='bg-white'>
-        <div className='layout flex min-h-screen flex-col items-center justify-center py-12 text-center'>
+      <section className='bg-[#262522]'>
+        <div className='layout flex min-h-screen flex-row items-center justify-center py-12 text-center'>
           <Referee />
+          <EngineLinesPanel></EngineLinesPanel>
         </div>
       </section>
     </main>
   );
 }
+
+HomePage.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>;
+};

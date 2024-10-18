@@ -1,19 +1,23 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 
 export const AuthContext = createContext<AuthContext>({
   isAuthenticated: false,
-  login: () => { return },
-  logout: () => { return },
+  login: () => {
+    return;
+  },
+  logout: () => {
+    return;
+  },
 });
 
 interface AuthProviderProps {
-  children: JSX.Element
+  children: JSX.Element;
 }
 
 interface AuthContext {
-  isAuthenticated: boolean
-  login: () => void
-  logout: () => void
+  isAuthenticated: boolean;
+  login: () => void;
+  logout: () => void;
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {

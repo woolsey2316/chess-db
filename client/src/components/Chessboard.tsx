@@ -113,8 +113,8 @@ export default function Chessboard({ playMove, pieces }: Props) {
           : undefined;
       const highlight = currentPiece?.possibleMoves
         ? currentPiece.possibleMoves.some((p) =>
-            p.samePosition(new Position(i, j))
-          )
+          p.samePosition(new Position(i, j))
+        )
         : false;
 
       board.push(
@@ -135,7 +135,7 @@ export default function Chessboard({ playMove, pieces }: Props) {
         onMouseDown={(e) => grabPiece(e)}
         onMouseUp={(e) => dropPiece(e)}
         id='chessboard'
-        className='max-w-[800px] max-h-[800px] flex flex-wrap'
+        className='max-w-[800px] max-h-[800px] flex flex-wrap rounded-lg overflow-hidden'
         ref={chessboardRef}
       >
         {board}
