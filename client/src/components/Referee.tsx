@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 
+import { updateMove } from '@/lib/utils';
+
 import Chessboard from '@/components/Chessboard';
 
 import { Piece, Position } from '@/models';
@@ -10,7 +12,11 @@ import { PieceType, TeamType } from '@/Types';
 
 import { initialBoard } from '../constant';
 
-export default function Referee() {
+interface Props {
+  setMoves: React.Dispatch<React.SetStateAction<string>>
+}
+
+export default function Referee({setMoves} :  Props) {
   const [board, setBoard] = useState<Board>(initialBoard.clone());
   const [promotionPawn, setPromotionPawn] = useState<Piece>();
   const modalRef = useRef<HTMLDivElement>(null);
@@ -57,7 +63,7 @@ export default function Referee() {
       if (clonedBoard.winningTeam !== undefined) {
         checkmateModalRef.current?.classList.remove('hidden');
       }
-
+      setMoves(moves => updateMove(moves, playedPiece.position, destination))
       return clonedBoard;
     });
 

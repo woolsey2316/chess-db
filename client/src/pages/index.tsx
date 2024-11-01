@@ -1,8 +1,6 @@
-'use client';
-
 import Head from 'next/head';
 import * as React from 'react';
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import '@/lib/env';
 
 import EngineLinesPanel from '@/components/EngineLinesPanel';
@@ -22,15 +20,16 @@ import Referee from '@/components/Referee';
 // to customize the default configuration.
 
 export default function HomePage() {
+  const [moves, setMoves] = useState('');
   return (
     <main>
       <Head>
         <title>Home Page</title>
       </Head>
       <section className='bg-[#262522]'>
-        <div className='layout flex min-h-screen flex-row items-center justify-center py-12 text-center'>
-          <Referee />
-          <EngineLinesPanel></EngineLinesPanel>
+        <div className='layout flex min-h-screen flex-row items-center justify-center py-12 text-center space-x-4'>
+          <Referee setMoves={setMoves} />
+          <EngineLinesPanel moves={moves}></EngineLinesPanel>
         </div>
       </section>
     </main>

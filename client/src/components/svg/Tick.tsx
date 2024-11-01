@@ -1,10 +1,7 @@
+import { SVGProps } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-interface TickProps {
-  className?: string;
-}
-
-const Tick = ({ className }: TickProps) => {
+const Tick = ({ className }: SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width="48.370384mm"

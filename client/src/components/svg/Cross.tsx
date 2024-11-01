@@ -1,10 +1,7 @@
+import { SVGProps } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-interface CrossProps {
-  className?: string;
-}
-
-const Cross = ({ className }: CrossProps) => {
+const Cross = ({ className }: SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width="42.165443mm"

@@ -37,8 +37,10 @@ const nextConfig = {
           dimensions: false,
           titleProp: true,
         },
-      }
+      },
     );
+
+    config.output.globalObject = `(typeof self !== 'undefined' ? self : this)`
 
     // Modify the file loader rule to ignore *.svg, since we have it handled now.
     fileLoaderRule.exclude = /\.svg$/i;

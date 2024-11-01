@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';
+import plugin from 'tailwindcss/plugin';
 
 export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
@@ -22,6 +23,18 @@ export default {
           800: 'rgb(var(--tw-color-primary-800) / <alpha-value>)',
           900: 'rgb(var(--tw-color-primary-900) / <alpha-value>)',
           950: 'rgb(var(--tw-color-primary-950) / <alpha-value>)',
+        },
+        gray: {
+          50: '#d6d6d6',
+          100: '#ccccc',
+          200: '#bababa',
+          300: '#e0cec7',
+          400: '#949494',
+          500: '#bfa094',
+          600: '#404040',
+          700: '#977669',
+          800: '#846358',
+          900: '#43302b',
         },
         dark: '#222222',
       },
@@ -52,5 +65,10 @@ export default {
       },
     },
   },
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [
+    require('@tailwindcss/forms'),
+    plugin(function({ addVariant }) {
+      addVariant('slider-thumb', ['&::-webkit-slider-thumb', '&::slider-thumb'])
+    })
+  ],
 } satisfies Config;
